@@ -10,6 +10,19 @@ jobs:
   test: 
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - run: yarn install 
-      - run: yarn test
+      - name: Checkout
+        uses: actions/checkout@v2
+      
+      - name: Install and Test
+        run: |
+          yarn install
+          yarn test
+
+      - name: Build
+        run: yarn build
+
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@4.1.1
+        with:
+          branch: gh-pages
+          folder: build
